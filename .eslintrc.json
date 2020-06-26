@@ -24,6 +24,9 @@
         "prettier/prettier": "error",
         "class-method-use-this": "off",
         "@typescript_eslint/cammelcase": "off",
+        "@typescript-eslint-no-used-vars": ["error", {
+            "argsIgnorePattern": "_"
+        }],
         "import/extensions": [
             "error",
             "ignorePackages",

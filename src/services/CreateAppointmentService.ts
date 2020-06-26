@@ -2,6 +2,7 @@ import Appointment from '../models/Appointments';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
+import AppError from '../errors/AppError';
 interface Request {
     provider_id: string;
     date: Date;
@@ -18,7 +19,7 @@ class CreateAppointmentService {
         );
 
         if (findAppointmentInStateDate) {
-            throw Error('This appointment is already bookend');
+            throw new AppError('This appointment is already bookend');
         }
         
         const appointment = appointmentsRepository.create({
