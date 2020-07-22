@@ -3,8 +3,7 @@ import IMailProvider from '../models/IMailProvider';
 export default class EtherealMailProvider implements IMailProvider {
     private client: Transporter;
     constructor() {
-        console.log('EntreiEm createTestAccount');
-        nodemailer.createTestAccount().then(account => {
+         nodemailer.createTestAccount().then(account => {
             const transporter = nodemailer.createTransport({
                 host: account.smtp.host,
                 port: account.smtp.port,
@@ -19,7 +18,7 @@ export default class EtherealMailProvider implements IMailProvider {
         
     }
     public async sendMail(to: string, body: string): Promise<void> {
-        console.log('EntreiEm sendMail');
+
         const message = await this.client.sendMail({
             from: 'Equipe GoBarber <equipe@gobarber.com.br>',
             to,

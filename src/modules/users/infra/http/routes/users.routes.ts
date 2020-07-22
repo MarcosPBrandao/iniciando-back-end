@@ -9,7 +9,7 @@ import UserAvatarController from '../controllers/UserAvatarControllers';
 import ensureAuthenticates from '../middlewares/EnsureAuthenticated'
 
 const usersRouter = Router();
-console.log('valendo');
+
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
 const upload = multer(uploadConfig);
