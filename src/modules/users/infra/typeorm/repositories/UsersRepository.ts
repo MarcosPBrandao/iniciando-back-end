@@ -15,9 +15,11 @@ class UsersRepository implements IUsersRepository {
       return user;
     }
     public async findByEmail(email: string): Promise<User | undefined> {
+        console.log('EuemfindByEmail'+email);
         const user = await this.ormRepository.findOne({
             where: { email }
         });
+        console.log('EuemfindByEmail user ' + user);
         return user;
     }
 

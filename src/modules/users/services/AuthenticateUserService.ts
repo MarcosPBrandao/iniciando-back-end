@@ -8,7 +8,7 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
 //import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-import usersRepository from '../infra/typeorm/repositories/UsersRepository';
+import UsersRepository from '../infra/typeorm/repositories/UsersRepository';
 
 interface IRequest {
     email: string;
@@ -21,16 +21,15 @@ interface IResponse {
 @injectable()
 class AuthenticateUserService {
     constructor(
-        @inject(usersRepository)
+        @inject('UsersRepository')
         private usersRepository: IUsersRepository, 
         
         @inject('HashProvider')
         private hashProvider: IHashProvider,
     ) {}
     public async execute({ email, password }: IRequest ): Promise<IResponse> {
-        
         const user = await this.usersRepository.findByEmail(email);
-
+        console.log(email);
         if (!user) {
            throw new AppError('Incorrect Email/password combination.', 401);
         }
