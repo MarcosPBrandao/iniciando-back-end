@@ -28,8 +28,9 @@ class AuthenticateUserService {
         private hashProvider: IHashProvider,
     ) {}
     public async execute({ email, password }: IRequest ): Promise<IResponse> {
+        
         const user = await this.usersRepository.findByEmail(email);
-        console.log(email);
+        
         if (!user) {
            throw new AppError('Incorrect Email/password combination.', 401);
         }
@@ -38,18 +39,18 @@ class AuthenticateUserService {
             password, 
             user.password
         );
-
+        
         if (!passwordMatched) {
             throw new AppError('Incorrect Email/password combination.', 401);
         }
-
+        
         const { secret, expiresIn } = authConfig.jwt;
-
+        
         const token = sign({}, secret, {
             subject: user.id,
             expiresIn: expiresIn
         });
-
+        
         return {
             user,
             token,
