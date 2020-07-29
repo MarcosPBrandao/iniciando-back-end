@@ -9,7 +9,7 @@ import AppError from '@shared/errors/AppError';
 class DiskStorageProvider implements IStorageProvider {
     private client: S3;
     constructor() {
-        this.client = new aws.S3({
+            this.client = new aws.S3({
             region: 'us-east-1',
         })
     }
@@ -20,16 +20,16 @@ class DiskStorageProvider implements IStorageProvider {
             throw new Error('File not found');
         }
         const fileContent = await fs.promises.readFile(originalPath);
-        await this.client
-            .putObject({
-                Bucket: uploadConfig.config.aws.bucket,
-                key: file,
-                ACL: 'public-read',
-                Body: fileContent,
-                ContentType,
-                ContentDisposition: `inline; filename=${file}`
-            })
-            .promise();
+        // await this.client
+        //     .putObject({
+        //         Bucket: uploadConfig.config.aws.bucket,
+        //         key: file,
+        //         ACL: 'public-read',
+        //         Body: fileContent,
+        //         ContentType,
+        //         ContentDisposition: `inline; filename=${file}`
+        //     })
+        //     .promise();
         await fs.promises.unlink(originalPath);
         return file;
     }
