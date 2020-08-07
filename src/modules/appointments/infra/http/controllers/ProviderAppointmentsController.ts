@@ -5,12 +5,12 @@ import ListProviderAppointmentsService from '@modules/appointments/services/List
 import { classToClass } from 'class-transformer';
 export default class ProviderAppointmentsController {
   public async index(request: Request, response: Response): Promise<Response> {
-   
+    
     const provider_id = request.user.id;
     const { day, month, year } = request.query;
-   
+    //console.log('fizme');
     const listProviderAppointments = container.resolve(ListProviderAppointmentsService);
-   
+    
     const appointments = await listProviderAppointments.execute({ 
         provider_id,      
         day: Number(day),
